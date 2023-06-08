@@ -128,7 +128,7 @@ print(" "); print("Done ..."); print(" ")
 # Administrator of the National Aeronautics and Space Administration (NASA).
 # All Rights Reserved.
 #
-# Author: John L. Schnase, NASA
+# Author: John L. Schnase
 # Revision Date: 2023.03.03
 #
 # -------------------------------------------------------------------------
