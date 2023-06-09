@@ -129,7 +129,6 @@ print(" "); print("Done ..."); print(" ")
 # All Rights Reserved.
 #
 # Author: John L. Schnase
-# Revision Date: 2023.03.03
 #
 # -------------------------------------------------------------------------
 #
