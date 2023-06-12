@@ -1,6 +1,6 @@
 # ==============================================================================
 #
-# 02a_get_occurrences.R
+# get_occurrences.R
 # - gathers observational data from the Global Biodiversity Information
 #   Facility (GBIF) and builds a times series occurrence files
 #
