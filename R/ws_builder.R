@@ -1,8 +1,8 @@
 # ==============================================================================
 #
-# 02b_m2_ws_builder.R
+# ws_builder.R
 #
-# Script subsets mmx base_collection MERRA-2 nc files to create a working_set
+# Ssubsets mmx base_collection MERRA-2 nc files to create a working_set
 # collection of cropped, resampled, downscaled, and masked MaxEnt-ready
 # asc files following the method of R.J. Hijmans as described here:
 # https://stat.ethz.ch/pipermail/r-sig-geo/2010-February/007544.html
