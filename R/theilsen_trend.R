@@ -1,7 +1,7 @@
 # ==============================================================================
 #
-# 06c_hsm_theilsen_trend.R
-# - finds Theil-Sen median slope estimator for changing hsm predictions
+# theilsen_trend.R
+# - finds Theil-Sen median slope estimator for times series predictions
 #
 # ==============================================================================
 
