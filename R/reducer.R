@@ -1,6 +1,6 @@
 # ==============================================================================
 #
-# 04c_reducer.R
+# reducer.R
 # - removes collinear variables from the selection_set to create a model_set
 #   of non-collinear variables for use in final model construction
 #   (generally used after mmx_linter.R)
