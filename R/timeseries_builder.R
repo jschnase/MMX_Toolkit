@@ -1,6 +1,6 @@
 # ==============================================================================
 #
-# 04c_mmx_timeseries_builder.R
+# timeseries_builder.R
 # - script does ENMeval-based model calibration and final model construction:
 #     . creates a bias file using 2d kernel density estimation
 #     . determines optimal model parameters using enmeval
