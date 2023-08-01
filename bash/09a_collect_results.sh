@@ -2,9 +2,7 @@
 
 # ==============================================================================
 #
-# select_vars_remote02.sh (run on local host)
-# - completes the MMX selection process by transfering selected variables from
-#   the remote server to the local host and setting up continued processing
+# 09a_collect_results.sh 
 #
 # ==============================================================================
 
@@ -12,85 +10,54 @@
 # clear
 source ~/MMX_Toolkit/bash/_config_functions.sh 
 read_config
-show_config
+# show_config
 
 
-function get_remote_mbox () {
+function collect_results () {  
+
+	DST_DIR=$MMX_EXPERIMENT_DIRECTORY/$RUN_NAME/Summaries
 	
-	# transfer remote mbox to local machine
-	echo ">>> transfering remote mbox to local host"
-	# echo ">>> enter the follow command line at the terminal prompt:
-	# echo scp -r adaptlogin.nccs.nasa.gov:$EXPLORE_MMX_TOOLKIT_DIRECTORY/_mbox $MMX_TOOLKIT_DIRECTORY
-	SRC=adaptlogin.nccs.nasa.gov:$EXPLORE_MMX_TOOLKIT_DIRECTORY/_mbox
-	DST=$MMX_TOOLKIT_DIRECTORY
-	scp -r $SRC $DST
-	echo ">>> done ..."
+	# trend results
+	SRC_DIR=$MMX_EXPERIMENT_DIRECTORY/$RUN_NAME/Trends
+	FILE1=$SRC_DIR/ENM/TheilSen/$SPECIES_NAME-ENM-TheilSen-Maps.png
+	FILE2=$SRC_DIR/ENM/TheilSen/$SPECIES_NAME-ENM-TheilSen-Slope.png
+	FILE3=$SRC_DIR/ENM/TheilSen/$SPECIES_NAME-ENM-TheilSen-Slope-Z-Overlay.png
+	FILE4=$SRC_DIR/ENM/TheilSen/$SPECIES_NAME-ENM-TheilSen-Stats.txt
 	
-return 0; }
-
-
-function populate_local_ss_directory () {
-    # symlinks variables from local collection
-
+	cp $FILE1 $DST_DIR
+	cp $FILE2 $DST_DIR
+	cp $FILE3 $DST_DIR
+	cp $FILE4 $DST_DIR
+	
+	# velocity results
+	SRC_DIR=$MMX_EXPERIMENT_DIRECTORY/$RUN_NAME/Velocities
+	FILE5=$SRC_DIR/ENM/$SPECIES_NAME-ENM-Weighted-Centroid.csv
+	FILE6=$SRC_DIR/ENM/$SPECIES_NAME-ENM-Weighted-Centroid.png
+	
+	cp $FILE5 $DST_DIR
+	cp $FILE6 $DST_DIR
+	
+	# -----
+	
+	# top variables results
 	YEAR=$TEMPORAL_EXTENT_START_YR
 	while [ $YEAR -le $TEMPORAL_EXTENT_STOP_YR ]
-	do
-		echo ">>> symlinking $YEAR selection_set variables"
-		# SRC=/Users/jschnase/Dropbox/MMX-Project/MMX-Experiments/$EXPERIMENT_NAME/Cassins_Sparrow-Annual-V1/TimeSeries/$YEAR/selection_set/_SS-$YEAR.csv
-		SRC=$MTK_MBOX_DIRECTORY/Exp000/Run000/$YEAR/selection_set/ss_top_ten.csv
-		DST=$MMX_EXPERIMENT_DIRECTORY/$RUN_NAME/TimeSeries/$YEAR/selection_set/_SS-$YEAR.csv
-		cp $SRC $DST
-
-		while IFS=, read -r VAR CNT SUM AVG
 		do
-		    # If var matches header line value, continue
-		     if [[ $VAR == "var" ]]; then
-		        continue
-		     fi
-		# cp -r $WS_SRC_DIRECTORY/$YEAR/$VAR.asc $MMX_EXPERIMENT_DIRECTORY/$RUN_NAME/TimeSeries/$YEAR/selection_set
-		ln -s $WS_SRC_DIRECTORY/$YEAR/$VAR.asc $MMX_EXPERIMENT_DIRECTORY/$RUN_NAME/TimeSeries/$YEAR/selection_set
-		done < $DST
-
-		YEAR=$(( $YEAR + $TEMPORAL_EXTENT_INTERVAL ))
-	done
-
-return 0; }
-
-
-function back_up_mbox () {
+			SRC=$MMX_EXPERIMENT_DIRECTORY/$RUN_NAME/TimeSeries/$YEAR/model/$YEAR\_model_permutation_importance.csv
+			DST=$MMX_EXPERIMENT_DIRECTORY/$RUN_NAME/Summaries/$SPECIES_NAME-Variable-PI-Summary.csv
+			cat $SRC >> $DST
+			YEAR=$(( $YEAR + $TEMPORAL_EXTENT_INTERVAL))
+		done
 	
-    TIME_STAMP0=`date +%s`
-	TIME_STAMP1=`date +%m.%d.%Y-%H.%M`
-
-	# create backup mbox
-	echo ">>> creating backup mbox"
-	MBOX_BAK=$MMX_TOOLKIT_DIRECTORY/_mbox_archive/_mbox-$EXPERIMENT_NAME-$RUN_NAME-$TIME_STAMP0
-	mv $MTK_MBOX_DIRECTORY $MBOX_BAK
-	touch $MBOX_BAK/_$TIME_STAMP1
-	echo ">>> $MTK_MBOX_DIRECTORY/$EXPERIMENT_NAME/$RUN_NAME backup mbox created"
-	
-	# creating a new empty mbox
-	echo ">>> creating new empty mbox"
-	mkdir $MMX_TOOLKIT_DIRECTORY/_mbox
-
-	echo ">>> done ..."
-
 return 0; }
 
 
 # main -------------------------------------------------------------------------
 
-
-echo " "; echo "Starting 04a_select_vars_remote03.sh ..."; echo " "
-
-get_remote_mbox
-
-populate_local_ss_directory
-
-back_up_mbox
-
+echo " "; echo "Collecting run results ..."; echo " "
+collect_results
 echo " "; echo "Done ..."; echo " "
-
+exit 0
 
 
 # ------------------------------------------------------------------------------
@@ -98,8 +65,8 @@ echo " "; echo "Done ..."; echo " "
 # Administrator of the National Aeronautics and Space Administration (NASA).
 # All Rights Reserved.
 #
-# Author: John L. Schnase, NASA
-# Revision Date: 2023.03.27
+# Author: JLS
+# Date: 2023.03.12
 #
 # ------------------------------------------------------------------------------
 #

@@ -2,8 +2,7 @@
 
 # ==============================================================================
 #
-# select_vars_remote01.sh (run on local host)
-# - starts the MMX selection process by preparing the local host's mbox
+# 05a_setup_ta_directories.sh
 #
 # ==============================================================================
 
@@ -11,71 +10,52 @@
 # clear
 source ~/MMX_Toolkit/bash/_config_functions.sh 
 read_config
-show_config
+# show_config
 
 
-function set_up_local_mbox () {
-	
-	# create the run's local mbox oc folder and populate with occurrence files
-	if [ -d $MTK_MBOX_DIRECTORY/Exp000/Run000 ]
-		then
-			echo ">>> $MTK_MBOX_DIRECTORY/Exp000/Run000 directory exists"
-			echo ">>> stopping ..."
-			exit 1
-		else
-			echo ">>> creating $MTK_MBOX_DIRECTORY/Exp000/Run000 directory"
-			mkdir $MTK_MBOX_DIRECTORY/Exp000
-			mkdir $MTK_MBOX_DIRECTORY/Exp000/Run000
-			cp $MMX_EXPERIMENT_DIRECTORY/_mmx_config $MTK_MBOX_DIRECTORY
-			cp $MMX_EXPERIMENT_DIRECTORY/_mmx_config $MTK_MBOX_DIRECTORY/Exp000/Run000
-			
-			YEAR=$TEMPORAL_EXTENT_START_YR
-			while [ $YEAR -le $TEMPORAL_EXTENT_STOP_YR ]
-			do
-				echo ">>> copying $YEAR occurrence file to mbox directory"
-				mkdir $MTK_MBOX_DIRECTORY/Exp000/Run000/$YEAR
-				mkdir $MTK_MBOX_DIRECTORY/Exp000/Run000/$YEAR/occurrence_file
-				SRC=$MMX_EXPERIMENT_DIRECTORY/$RUN_NAME/TimeSeries/$YEAR/occurrence_file/OF-$YEAR.csv
-				DST=$MTK_MBOX_DIRECTORY//Exp000/Run000/$YEAR/occurrence_file/OF-$YEAR.csv
-				cp $SRC $DST
-				
-				echo ">>> creating selection_set directory"
-				mkdir $MTK_MBOX_DIRECTORY/Exp000/Run000/$YEAR/selection_set
-				
-				YEAR=$(( $YEAR + $TEMPORAL_EXTENT_INTERVAL ))
-			done
-			
-			echo ">>> done ..."
-	fi
-	
-return 0; }
+function setup_03 () {  # 05a_setup_ta_directories
 
+	START_YEAR=$TEMPORAL_EXTENT_START_YR
+	STOP_YEAR=$TEMPORAL_EXTENT_STOP_YR
+	STEP=$TEMPORAL_EXTENT_INTERVAL
 
-function send_local_mbox () {
+	EXP_DIR=$MMX_EXPERIMENT_DIRECTORY
+	TS_DIR=$MMX_EXPERIMENT_DIRECTORY/$RUN_NAME/TimeSeries
+	TA_DIR=$MMX_EXPERIMENT_DIRECTORY/$RUN_NAME/Trends
+	VA_DIR=$MMX_EXPERIMENT_DIRECTORY/$RUN_NAME/Velocities
+
+	# create enm trend analysis directories
+	echo ">>> creating enm trend analysis directories"
+	[ ! -d $TA_DIR ] && mkdir $TA_DIR
+	[ ! -d $TA_DIR/ENM ] && mkdir $TA_DIR/ENM
+	[ ! -d $TA_DIR/ENM/_Predictions ] && mkdir $TA_DIR/ENM/_Predictions
+	# [ ! -d $TA_DIR/ENM/Percentile ] && mkdir $TA_DIR/ENM/Percentile
+	# [ ! -d $TA_DIR/ENM/Percentile/Maps ] && mkdir $TA_DIR/ENM/Percentile/Maps
+	# [ ! -d $TA_DIR/ENM/Presence ] && mkdir $TA_DIR/ENM/Presence
+	[ ! -d $TA_DIR/ENM/TheilSen ] && mkdir $TA_DIR/ENM/TheilSen
 	
-	# transfer local mbox to remote machine
-	echo ">>> transfering local mbox to remote mmx cluster"
-	# echo ">>> enter the follow command line at the terminal prompt:"
-	# echo scp -r $MTK_MBOX_DIRECTORY adaptlogin.nccs.nasa.gov:$EXPLORE_MMX_TOOLKIT_DIRECTORY
-	SRC=$MTK_MBOX_DIRECTORY
-	DST=adaptlogin.nccs.nasa.gov:$EXPLORE_MMX_TOOLKIT_DIRECTORY
-	scp -r $SRC $DST
-	echo ">>> done ..."
+	# populate enm predictions directory
+	YEAR=$START_YEAR
+	while [ $YEAR -le $STOP_YEAR ]
+	do
+		echo ">>> populating ENM predictions directory $YEAR"
+		cp $TS_DIR/$YEAR/model/$YEAR\_model_prediction.asc $TA_DIR/ENM/_Predictions/$YEAR.asc
+		YEAR=$(( $YEAR + $STEP))
+	done
 	
+	# # create var trend analysis directories
+	# echo ">>> creating var trend analysis directories"
+	# [ ! -d $TA_DIR/VAR ] && mkdir $TA_DIR/VAR
+
 return 0; }
 
 
 # main -------------------------------------------------------------------------
 
-
-echo " "; echo "Starting 04a_select_vars_remote01.sh ..."; echo " "
-
-set_up_local_mbox
-
-send_local_mbox
-
+echo " "; echo "Setting up trend analysis directories ..."; echo " "
+setup_03
 echo " "; echo "Done ..."; echo " "
-
+exit 0
 
 
 # ------------------------------------------------------------------------------
@@ -83,8 +63,8 @@ echo " "; echo "Done ..."; echo " "
 # Administrator of the National Aeronautics and Space Administration (NASA).
 # All Rights Reserved.
 #
-# Author: John L. Schnase, NASA
-# Revision Date: 2023.04.02
+# Author: JLS
+# Date: 2023.02.08
 #
 # ------------------------------------------------------------------------------
 #

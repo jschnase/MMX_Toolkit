@@ -2,7 +2,7 @@
 
 # ==============================================================================
 #
-# select_vars_local.sh
+# 04a_select_vars_local.sh
 # - starts the MMX selection process by launchiing an ensemble run
 #   (script will process all intervals in the time series, or a single interval
 #    as indicated by a single positional parameter)
@@ -93,8 +93,8 @@ exit 0
 # Administrator of the National Aeronautics and Space Administration (NASA).
 # All Rights Reserved.
 #
-# Author: John L. Schnase, NASA
-# Revision Date: 2023.02.25
+# Author: JLS
+# 2023.02.25
 #
 # ------------------------------------------------------------------------------
 #
