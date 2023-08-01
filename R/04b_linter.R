@@ -1,9 +1,8 @@
 # ==============================================================================
 #
-# reducer.R
-# - removes collinear variables from the selection_set to create a model_set
-#   of non-collinear variables for use in final model construction
-#   (generally used after mmx_linter.R)
+# 04b_linter.R
+# - removes NA-rich variables from the selection_set
+#   (optional, used before mmx_reducer.R, repeat as needed until clean)
 #
 # ==============================================================================
 
@@ -15,15 +14,18 @@ source("~/MMX_Toolkit/R/_config_functions.R")
 read.config()
 # show.config()
 
-# install.packages("usdm", dependencies = TRUE)
-library(usdm)
+# install.packages("raster", dependencies = TRUE)
+# install.packages("ncdf4", dependencies = TRUE)
+
+library(raster)
+library(ncdf4)
 
 
 # initializations --------------------------------------------------------------
 
-wd      <- MMX_EXPERIMENT_DIRECTORY
-run     <- RUN_NAME
-run_dir <- paste0(wd, "/", run, "/TimeSeries")
+wd       <- MMX_EXPERIMENT_DIRECTORY
+run      <- RUN_NAME
+run_dir  <- paste0(wd, "/", run, "/TimeSeries")
 
 start_yr <- as.numeric(TEMPORAL_EXTENT_START_YR)
 stop_yr  <- as.numeric(TEMPORAL_EXTENT_STOP_YR)
@@ -32,48 +34,70 @@ step     <- as.numeric(TEMPORAL_EXTENT_INTERVAL)
 
 # main processing loop ---------------------------------------------------------
 
-print(" "); print("Starting 04c_reducer.R ..."); print(" ")
+print(" "); print("Startimg 04b_linter.R ..."); print(" ")
 
 for (year in seq(start_yr, stop_yr, step)) {
 
 # set run paths
+of_file <- paste0(run_dir, "/", year, "/occurrence_file/OF-", year, ".csv")
 ss_dir  <- paste0(run_dir, "/", year, "/selection_set")
-ws_dir  <- paste0(run_dir, "/", year, "/working_set")
 ms_dir  <- paste0(run_dir, "/", year, "/model_set")
 
-src <- ss_dir
-dst <- ms_dir
+src     <- ss_dir
+dst     <- ss_dir
+
+# load and count occurrence points
+occ <- read.csv(of_file)[,-1]
+obs <- nrow(occ)
 
 # load environmental layers
 src_vars <- list.files(src, pattern = "*.asc")
 stack_list <- list()
-for (i in 1:length(src_vars)){
+
+# initialize variables
+max_na  <- 0
+max_var <- ""
+tot_na  <- 0
+n       <- length(src_vars)
+
+# show linting scan
+print(paste0("--- ", year, " -----------------------"))
+
+for (i in 1:n){
     s <- raster(paste0(src, "/", src_vars[i]))
-    plot(s, main=paste0(src_vars[i], " - ", year))
-    stack_list[[i]] <- stack(s)
+    na <- sum(is.na(extract(s,occ)))
+    print(paste0(src_vars[[i]], " - NA = ", na))
+    if (na > max_na) {
+        max_na <- na
+        max_var <- src_vars[i]
+        }
+    tot_na <- tot_na + na
 }
-src_vars_stack <- stack(stack_list)
+print("---")
+avg_na1 <- round((tot_na / n), digits = 1)
+avg_na2 <- round(((tot_na - max_na) / (n - 1)), digits = 1)
+print(paste0("max = ", max_var, " na = ", max_na))
+print(paste0("avg1 = ", avg_na1))
+print(paste0("avg2 = ", avg_na2))
 
-# reduce src collinearities
-var_vifs <- vif(src_vars_stack)
-cor_vars <- vifstep(src_vars_stack, th = 10)
-ms_vars  <- exclude(src_vars_stack, cor_vars)
+# lint as needed
+msg <- paste0("original selection set ( n = ", length(list.files(src, pattern = "*.asc")), " ):")
+print("---"); print(msg)
+print(list.files(src, pattern = "*.asc"))
+if ( (avg_na1-avg_na2) > 0.2 ) {
+    old_list <- list.files(src, pattern = "*.asc")
+    print(" "); print(paste0("bad var: ", src, "/", max_var))
 
-write.csv(var_vifs, file = paste0(ms_dir, "/_variable_vifs.csv"))
-write.csv(cor_vars@variables, file = paste0(ms_dir, "/_source_variables.csv"))
-write.csv(cor_vars@results, file = paste0(ms_dir, "/_correlation_results.csv"))
-write.csv(cor_vars@corMatrix, file = paste0(ms_dir, "/_correlation_matrix.csv"))
-write.csv(cor_vars@excluded, file = paste0(ms_dir, "/_excluded_variables.csv"))
-write.csv(cor_vars@results$Variables, file = paste0(ms_dir, "/_retained_variables.csv"))
+    # rename in place ...
+    src_var <- paste0(src, "/", max_var)
+    dst_var <- paste0(dst, "/", gsub(".asc", ".xxx", max_var))
+    file.rename(src_var, dst_var)
 
-print(" "); print(paste0("--- ", year, " -----------------------------")); print(" ")
-print(">>> variable inflation factors"); print(var_vifs); print(" ")
-print(">>> correlated variables"); print(cor_vars); print(" ")
-
-# create model_set with non-collinear variables
-for (i in 1:length(names(ms_vars))) {
-    system(paste0("cp ", src, "/", names(ms_vars)[i], ".asc", " ", ms_dir, "/."))
 }
+
+msg <- paste0("linted selection set ( n = ", length(list.files(src, pattern = "*.asc")), " ):")
+print("---"); print(msg)
+print(list.files(src, pattern = "*.asc")); print(" ")
 
 # invisible(readline(prompt="Press [enter] to continue"))
 
@@ -87,8 +111,8 @@ print(" "); print("Done ..."); print(" ")
 # Administrator of the National Aeronautics and Space Administration (NASA).
 # All Rights Reserved.
 #
-# Author: John L. Schnase, NASA
-# Revision Date: 2023.02.08
+# Author: JLS
+# Date: 2023.02.08
 #
 # -------------------------------------------------------------------------
 #

@@ -1,6 +1,6 @@
 # ==============================================================================
 #
-# get_occurrences.R
+# 02a_get_occurrences.R
 # - gathers observational data from the Global Biodiversity Information
 #   Facility (GBIF) and builds a times series occurrence files
 #
@@ -76,7 +76,7 @@ for (int_year in seq(start_yr, stop_yr, step)) {
                           month    = mo_span,
                           fields   = "all",
                           limit    = occ_count(taxonKey      = sp_key,
-                                               georeferenced = TRUE,
+                                               hasCoordinate = TRUE,
                                                year          = obs_year))
         # snarf coordinates from the species record set
         occs <- dplyr::select(spp$data, decimalLongitude, decimalLatitude)
@@ -128,7 +128,8 @@ print(" "); print("Done ..."); print(" ")
 # Administrator of the National Aeronautics and Space Administration (NASA).
 # All Rights Reserved.
 #
-# Author: John L. Schnase
+# Author: JLS
+# Date: 2023.03.03
 #
 # -------------------------------------------------------------------------
 #

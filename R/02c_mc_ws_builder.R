@@ -1,10 +1,10 @@
 # ==============================================================================
 #
-# ws_builder.R
+# 02c_mc_ws_builder.R
 #
-# Ssubsets mmx base_collection MERRA-2 nc files to create a working_set
-# collection of cropped, resampled, downscaled, and masked MaxEnt-ready
-# asc files following the method of R.J. Hijmans as described here:
+# Script subsets mmx base_collection MERRA-2-derived MERRAclim-2 tif files to 
+# create a working_set collection of cropped, resampled, downscaled, and masked 
+# MaxEnt-ready asc files following the method of R.J. Hijmans as described here:
 # https://stat.ethz.ch/pipermail/r-sig-geo/2010-February/007544.html
 #
 # (NB default settings throughout are set up for 05YrAg processing)
@@ -41,10 +41,11 @@ step_yr  <- as.numeric(TEMPORAL_EXTENT_INTERVAL)
 # is named for the species being processed ...
 ws_dir  <- WS_DST_DIRECTORY
 out_dir <- paste0(ws_dir, "/", GBIF_TAXON_KEY,"-", SPECIES_NAME)
+
 if (!dir.exists(out_dir)){
     dir.create(out_dir)
 }else{
-    print(">>> 02b_m2_ws_builder.R: ws directory exists")
+    print(">>> 02c_mc_ws_builder.R: ws directory exists")
 }
 
 # set path to the toolkit predictor base_collection
@@ -84,13 +85,16 @@ writeRaster(mask, filename=paste0(out_dir, '/_mask.asc'), format='ascii', overwr
 
 # main processing loop ---------------------------------------------------------
 
-print("Starting 02b_m2_ws_builder.R ...")
+print("Starting 02c_mc_ws_builder.R ...")
 
 for (year in seq(start_yr, stop_yr, step_yr)) {
     dir.create(paste0(out_dir, "/", year))
-    files <- list.files(path = bc_dir, pattern = paste0(year, ".nc"))
+    # files <- list.files(path = bc_dir, pattern = paste0(year, ".tif"))
+    # files <- list.files(path = bc_dir, pattern = paste0("/", var))
+    files <- list.files(paste0(bc_dir, "/", year))
     for (var in files) {
-        r <- raster(paste0(bc_dir, "/", var ))
+        # r <- raster(paste0(bc_dir, "/", var ))
+        r <- raster(paste0(bc_dir, "/", year, "/", var ))
 
         # lores option (ie native merra-2)
         # lores_s      <- raster(r)
@@ -108,6 +112,8 @@ for (year in seq(start_yr, stop_yr, step_yr)) {
         hires_c      <- crop(hires_s, ext)
         hires_m      <- raster::mask(hires_c, resample(mask, hires_c, method='bilinear'))
         str <- stri_replace_last_fixed(var, paste0("_", year, ".nc"), '.asc')
+        str <- stri_replace_first_fixed(var, paste0("m2_", year, "_"), "")
+        writeRaster(hires_m, filename=paste0(out_dir, "/", year, "/", str), format="ascii", overwrite=TRUE)
         writeRaster(hires_m, filename=paste0(out_dir, "/", year, "/", str), format="ascii", overwrite=TRUE)
         plot(hires_m, main=paste0("hires - ", var))
     }
@@ -125,7 +131,8 @@ print("Done ...")
 # Administrator of the National Aeronautics and Space Administration (NASA).
 # All Rights Reserved.
 #
-# Author: John L. Schnase
+# Author: JLS
+# Date: 2023.02.08
 #
 # -------------------------------------------------------------------------
 #

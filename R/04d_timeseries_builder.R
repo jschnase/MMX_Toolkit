@@ -1,6 +1,6 @@
 # ==============================================================================
 #
-# timeseries_builder.R
+# 04c_mmx_timeseries_builder.R
 # - script does ENMeval-based model calibration and final model construction:
 #     . creates a bias file using 2d kernel density estimation
 #     . determines optimal model parameters using enmeval
@@ -292,8 +292,8 @@ print(" "); print("Done ..."); print(" ")
 # Administrator of the National Aeronautics and Space Administration (NASA).
 # All Rights Reserved.
 #
-# Author: John L. Schnase, NASA
-# Revision Date: 2023.02.08
+# Author: JLS
+# Date: 2023.02.08
 #
 # -------------------------------------------------------------------------
 #

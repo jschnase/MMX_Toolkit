@@ -1,7 +1,7 @@
 # ==============================================================================
 #
-# theilsen_trend.R
-# - finds Theil-Sen median slope estimator for times series predictions
+# 06a_enm_theilsen_trend.R
+# - finds Theil-Sen median slope estimator for changing hsm predictions
 #
 # ==============================================================================
 
@@ -38,10 +38,10 @@ library(scales)
 
 wd   <- MMX_EXPERIMENT_DIRECTORY
 run  <- RUN_NAME
-src  <- paste0(wd, "/", run, "/Trends/HSM/_Predictions")
-dst  <- paste0(wd, "/", run, "/Trends/HSM/TheilSen")
-lbl  <- paste0(SPECIES_NAME, "-HSM-TheilSen")
-# dst <-"/Users/jschnase/Desktop"
+lbl  <- paste0(SPECIES_NAME, "-ENM-TheilSen")
+src  <- paste0(wd, "/", run, "/Trends/ENM/_Predictions")
+
+dst  <- paste0(wd, "/", run, "/Trends/ENM/TheilSen")
 
 sp_name     <- SPECIES_NAME
 state_lines <- vect(STATE_LINES_RDS)
@@ -63,7 +63,7 @@ fn8  <- paste0(lbl, "-RStudio-Image") # r image for the session
 
 # main processing --------------------------------------------------------------
 
-print(" "); print("Starting 06c_hsm_theilsen_trend.R ..."); print(" ")
+print(" "); print("Starting 06a_enm_theilsen_trend.R ..."); print(" ")
 
 # build hsm predictions raster stack
 stack <- raster(); vars <- list()
@@ -97,7 +97,7 @@ plot(k)
 dev.off()
 
 
-# HSM Time Series --------------------------------------------------------------
+# ENM Time Series --------------------------------------------------------------
 pal <- blue2green2red(400)
 plot(stack,
      col  = pal,
@@ -162,57 +162,60 @@ writeRaster(tsb,
             overwrite = TRUE)
 
 
-# # Theil-Sen p values -----------------------------------------------------------
-# p_min <- format(cellStats(raster(k$p.value), stat="min",  rm.na=TRUE),digits=3, nsmall=1)
-# p_max <- format(cellStats(raster(k$p.value), stat="max",  rm.na=TRUE),digits=3, nsmall=1)
-# p_avg <- format(cellStats(raster(k$p.value), stat="mean", rm.na=TRUE),digits=3, nsmall=1)
-#
-# tsp   <- raster(k$p.value)
-#
-# pal   <- paletteer::paletteer_c("ggthemes::Orange Light", n = 400, -1)
-# breakpoints <- c(0.001, 0.05)
-# colors <- c("white", "orange")
-# plot(tsp,
-#      main = fn3,
-#      sub = paste0("Theil-Sen P Values Min / Avg / Max = ", p_min, " / ", p_avg, " / ", p_max),
-#      col  = pal,
-#      zlim = c(0.0, 1.0))
-# minor.tick(nx=2, ny=2, tick.ratio=0.5, x.args = list(), y.args = list())
-# plot(state_lines, add = TRUE)
-# plot(k$p.value,breaks=breakpoints,col=colors, add = TRUE)
-#
-# png(paste0(dst, "/", fn3, ".png"),
-#     width     = 1000,
-#     height    = 750,
-#     units     = "px",
-#     res       = 72,
-#     pointsize = 15)
-# plot(tsp,
-#      main = fn3,
-#      sub = paste0("Theil-Sen P Values Min / Avg / Max = ", p_min, " / ", p_avg, " / ", p_max),
-#      col  = pal,
-#      zlim = c(0.0, 1.0))
-# minor.tick(nx=2, ny=2, tick.ratio=0.5, x.args = list(), y.args = list())
-# plot(state_lines, add = TRUE)
-# plot(k$p.value,breaks=breakpoints,col=colors, add = TRUE)
-# dev.off()
-#
-# # save .asc and .tif versions too
-# writeRaster(tsp,
-#             filename = paste0(dst, "/", fn3, ".asc"),
-#             format    = "ascii",
-#             overwrite = TRUE)
-#
-# writeRaster(tsp,
-#             filename = paste0(dst, "/", fn3, ".tif"),
-#             format   = "GTiff",
-#             overwrite = TRUE)
+# Theil-Sen p values -----------------------------------------------------------
+p_min <- format(cellStats(raster(k$p.value), stat="min",  rm.na=TRUE),digits=3, nsmall=1)
+p_max <- format(cellStats(raster(k$p.value), stat="max",  rm.na=TRUE),digits=3, nsmall=1)
+p_avg <- format(cellStats(raster(k$p.value), stat="mean", rm.na=TRUE),digits=3, nsmall=1)
+
+tsp   <- raster(k$p.value)
+
+pal   <- paletteer::paletteer_c("ggthemes::Orange Light", n = 400, -1)
+breakpoints <- c(0.001, 0.05)
+colors <- c("white", "orange")
+plot(tsp,
+     main = fn3,
+     sub = paste0("Theil-Sen P Values Min / Avg / Max = ", p_min, " / ", p_avg, " / ", p_max),
+     col  = pal,
+     zlim = c(0.0, 1.0))
+minor.tick(nx=2, ny=2, tick.ratio=0.5, x.args = list(), y.args = list())
+plot(state_lines, add = TRUE)
+plot(k$p.value,breaks=breakpoints,col=colors, add = TRUE)
+
+png(paste0(dst, "/", fn3, ".png"),
+    width     = 1000,
+    height    = 750,
+    units     = "px",
+    res       = 72,
+    pointsize = 15)
+plot(tsp,
+     main = fn3,
+     sub = paste0("Theil-Sen P Values Min / Avg / Max = ", p_min, " / ", p_avg, " / ", p_max),
+     col  = pal,
+     zlim = c(0.0, 1.0))
+minor.tick(nx=2, ny=2, tick.ratio=0.5, x.args = list(), y.args = list())
+plot(state_lines, add = TRUE)
+plot(k$p.value,breaks=breakpoints,col=colors, add = TRUE)
+dev.off()
+
+# save .asc and .tif versions too
+writeRaster(tsp,
+            filename = paste0(dst, "/", fn3, ".asc"),
+            format    = "ascii",
+            overwrite = TRUE)
+
+writeRaster(tsp,
+            filename = paste0(dst, "/", fn3, ".tif"),
+            format   = "GTiff",
+            overwrite = TRUE)
 
 
 # Mann-Kendall Z scores --------------------------------------------------------
-z_min <- format(cellStats(raster(k$z.value), stat="min",  rm.na=TRUE),digits=3, nsmall=1)
-z_max <- format(cellStats(raster(k$z.value), stat="max",  rm.na=TRUE),digits=3, nsmall=1)
-z_avg <- format(cellStats(raster(k$z.value), stat="mean", rm.na=TRUE),digits=3, nsmall=1)
+z_min <- cellStats(raster(k$z.value), stat="min",  rm.na=TRUE)
+z_max <- cellStats(raster(k$z.value), stat="max",  rm.na=TRUE)
+z_avg <- cellStats(raster(k$z.value), stat="mean", rm.na=TRUE)
+# z_min <- format(cellStats(raster(k$z.value), stat="min",  rm.na=TRUE),digits=3, nsmall=1)
+# z_max <- format(cellStats(raster(k$z.value), stat="max",  rm.na=TRUE),digits=3, nsmall=1)
+# z_avg <- format(cellStats(raster(k$z.value), stat="mean", rm.na=TRUE),digits=3, nsmall=1)
 
 mkz   <- raster(k$z.value)
 
@@ -323,6 +326,14 @@ minor.tick(nx=2, ny=2, tick.ratio=0.5, x.args = list(), y.args = list())
 plot(state_lines, add = TRUE)
 plot(pos, col=pal_pos, add=TRUE, legend = FALSE)
 plot(neg, col=pal_neg, add=TRUE, legend = FALSE)
+########### special for paper #3 ############
+# Cassins_Sparrow-GBIF-Annual-M2b-AVG
+# points(-102.9159, 33.44738, pch = 1)
+# points(-104.0122, 33.65596, pch = 16)
+# Cassins_Sparrow-GBIF-Annual-MCb-AVG
+# points(-102.7388, 33.25646, pch = 1)
+# points(-103.3524, 33.67923, pch = 16)
+#############################################
 
 png(paste0(dst, "/", fn2, "-Z-Overlay.png"),
     width     = 1000,
@@ -338,6 +349,14 @@ minor.tick(nx=2, ny=2, tick.ratio=0.5, x.args = list(), y.args = list())
 plot(state_lines, add = TRUE)
 plot(pos, col=pal_pos, add=TRUE, legend = FALSE)
 plot(neg, col=pal_neg, add=TRUE, legend = FALSE)
+########### special for paper #3 ############
+# Cassins_Sparrow-GBIF-Annual-M2b-AVG
+# points(-102.9159, 33.44738, pch = 1)
+# points(-104.0122, 33.65596, pch = 16)
+# Cassins_Sparrow-GBIF-Annual-MCb-AVG
+# points(-102.7388, 33.25646, pch = 1)
+# points(-103.3524, 33.67923, pch = 16)
+#############################################
 dev.off()
 
 # prep results for stats file
@@ -368,7 +387,7 @@ max <- format(round(as.numeric(max), 2), nsmall=2, big.mark=",")
 min <- format(round(as.numeric(min), 2), nsmall=2, big.mark=",")
 avg <- format(round(as.numeric(avg), 2), nsmall=2, big.mark=",")
 std <- format(round(as.numeric(std), 2), nsmall=2, big.mark=",")
-z_max <- format(round(as.numeric(z_max), 2), nsmall=2, big.mark=",")
+# z_max <- format(round(as.numeric(z_max), 2), nsmall=2, big.mark=",")
 km2_nss_pos <- format(round(as.numeric(km2_nss_pos), 1), nsmall=1, big.mark=",")
 pct_nss_pos <- format(round(as.numeric(pct_nss_pos), 1), nsmall=1, big.mark=",")
 
@@ -425,7 +444,7 @@ max <- format(round(as.numeric(max), 2), nsmall=2, big.mark=",")
 min <- format(round(as.numeric(min), 2), nsmall=2, big.mark=",")
 avg <- format(round(as.numeric(avg), 2), nsmall=2, big.mark=",")
 std <- format(round(as.numeric(std), 2), nsmall=2, big.mark=",")
-z_min <- format(round(as.numeric(z_min), 2), nsmall=2, big.mark=",")
+# z_min <- format(round(as.numeric(z_min), 2), nsmall=2, big.mark=",")
 km2_nss_neg <- format(round(as.numeric(km2_nss_neg), 1), nsmall=1, big.mark=",")
 pct_nss_neg <- format(round(as.numeric(pct_nss_neg), 1), nsmall=1, big.mark=",")
 
@@ -455,7 +474,7 @@ write("------------------------------------------------------------", stats_file
 
 
 # save R image
-save.image(paste0(dst, "/", fn8, ".RData"))
+# save.image(paste0(dst, "/", fn8, ".RData"))
 
 print(" "); print("Done ..."); print(" ")
 
@@ -465,8 +484,8 @@ print(" "); print("Done ..."); print(" ")
 # Administrator of the National Aeronautics and Space Administration (NASA).
 # All Rights Reserved.
 #
-# Author: John L. Schnase
-# Revision Date: 2023.04.26
+# Author: JLS
+# Date: 2023.04.26
 #
 # ------------------------------------------------------------------------------
 #
