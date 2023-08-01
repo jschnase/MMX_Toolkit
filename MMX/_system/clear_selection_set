@@ -1,0 +1,12 @@
+#!/bin/bash 
+
+# clear
+source ~/MMX_Toolkit/bash/_config_functions.sh 
+read_config
+# show_config
+
+echo ">>> clearing selection_set folder"
+ls -al $MTK_MMX_DIRECTORY/selection_set
+rm -r  $MTK_MMX_DIRECTORY/selection_set/* 2> /dev/null
+ls -al $MTK_MMX_DIRECTORY/selection_set
+echo ">>> selection_set folder cleared"

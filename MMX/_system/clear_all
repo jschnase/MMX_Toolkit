@@ -1,0 +1,13 @@
+#!/bin/bash 
+
+# clear
+source ~/MMX_Toolkit/bash/_config_functions.sh 
+read_config
+# show_config
+
+
+echo ">>> clearing all folders"
+$MTK_MMX_DIRECTORY/_system/clear_rbvmax_input
+$MTK_MMX_DIRECTORY/_system/clear_rbvmax_output
+$MTK_MMX_DIRECTORY/_system/clear_tmp
+echo ">>> all folders cleared"

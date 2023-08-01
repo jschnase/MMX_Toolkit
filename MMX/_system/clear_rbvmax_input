@@ -1,0 +1,12 @@
+#!/bin/bash 
+
+# clear
+source ~/MMX_Toolkit/bash/_config_functions.sh 
+read_config
+# show_config
+
+echo ">>> clearing input folder"
+ls -al $MTK_MMX_DIRECTORY/_system/_RBVMax/input
+rm -r  $MTK_MMX_DIRECTORY/_system/_RBVMax/input/* 2> /dev/null
+ls -al $MTK_MMX_DIRECTORY/_system/_RBVMax/input
+echo ">>> input folder cleared"

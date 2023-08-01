@@ -1,0 +1,13 @@
+#!/bin/tcsh
+
+clear
+
+set vm_cnt = 101
+set vm_max = 112
+
+while ( $vm_cnt <= $vm_max )
+    pdsh -w ilab$vm_cnt "echo '--------'; echo $SHELL; pwd; lscpu | grep CPU"
+    echo ' '
+    @ vm_cnt ++
+end
+

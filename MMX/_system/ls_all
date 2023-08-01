@@ -1,0 +1,11 @@
+#!/bin/bash 
+
+clear
+source ~/MMX_Toolkit/bash/_config_functions.sh 
+read_config
+# show_config
+
+ls -al $MTK_MMX_DIRECTORY/_system/_tmp
+ls -al $MTK_MMX_DIRECTORY/_system/_RBVMax/input
+ls -al $MTK_MMX_DIRECTORY/_system/_RBVMax/output
+ls -al $MTK_MMX_DIRECTORY/selection_set
