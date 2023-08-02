@@ -1,0 +1,1 @@
+This folder contains examle output from an example run using the MERRA-2 collection of environmental predictors. The MMX selection step peformed only n=10 samples per variable, and the ENMeval tuning step did only a minimal scan. The results seen here should not be interpreted as a science result, rather only as an example of software outputs.

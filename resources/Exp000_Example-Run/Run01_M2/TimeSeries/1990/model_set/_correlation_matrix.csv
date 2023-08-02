@@ -1,0 +1,8 @@
+"","evpsoil_avg","evptrns_avg","frwlt_avg","hflux_avg","prevtot_avg","swgnt_avg","tsurf_avg"
+"evpsoil_avg",1,NA,NA,NA,NA,NA,NA
+"evptrns_avg",NA,1,NA,NA,NA,NA,NA
+"frwlt_avg",NA,NA,1,NA,NA,NA,NA
+"hflux_avg",NA,NA,NA,1,NA,NA,NA
+"prevtot_avg",NA,NA,NA,NA,1,NA,NA
+"swgnt_avg",NA,NA,NA,NA,NA,1,NA
+"tsurf_avg",NA,NA,NA,NA,NA,NA,1

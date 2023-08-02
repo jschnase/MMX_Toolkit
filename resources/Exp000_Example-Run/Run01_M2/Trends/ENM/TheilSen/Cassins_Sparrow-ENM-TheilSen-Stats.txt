@@ -1,0 +1,53 @@
+------------------------------------------------------------
+Cassins_Sparrow - Study Area Theil-Sen Trend Analysis
+Exp000/Run01_M2
+------------------------------------------------------------
+Study area coordinates UL = (44.01348,-115.5647)
+Study area coordinates LR = (24.83738,-93.47812)
+Study area =         1.0 km^2
+Study area = 3,903,265.8 km^2
+------------------------------------------------------------
+Statistically-significant POSITIVE trend results:
+Positive trend area       =       1.0 km^2
+Positive trend area       = 231,952.0 km^2
+Positive trend percent    = 100.0 % of the study area *
+Positive trend percent    =   5.9 % of the study area *
+ 
+# Theil-Sen slope represents the rate of change in
+# projected probabilities of suitable habitat per
+# five-year interval of the time series:
+Theil-Sen slope avg  = 0.06 %/5-yr interval *
+Theil-Sen slope max  = 0.12 %/5-yr interval
+Theil-Sen slope min  = 0.00 %/5-yr interval
+Theil-Sen slope std  = 0.02 %/5-yr interval
+Mann-Kendall Z score = 3.34038370031141
+ 
+Statistically-insignificant positive trend results:
+Positive trend area       =         1.0 km^2
+Positive trend area       = 1,650,098.2 km^2
+Positive trend percent    = 100.0 % of the study area
+Positive trend percent    =  42.3 % of the study area
+ 
+------------------------------------------------------------
+Statistically-significant NEGATIVE trend results:
+Negative trend area       =       1.0 km^2
+Negative trend area       = 130,512.1 km^2
+Negative trend percent    = 100.0 % of the study area *
+Negative trend percent    =   3.3 % of the study area *
+ 
+# Theil-Sen slope represents the rate of change in
+# projected probabilities of suitable habitat per
+# five-year interval of the time series:
+Theil-Sen slope avg  = -0.03 %/5-yr interval *
+Theil-Sen slope max  = 0.00 %/5-yr interval
+Theil-Sen slope min  = -0.15 %/5-yr interval
+Theil-Sen slope std  = 0.03
+Mann-Kendall Z score = -3.09294787065871
+ 
+Statistically-insignificant negative trend results:
+Negative trend area       =         1.0 km^2
+Negative trend area       = 1,890,703.5 km^2
+Negative trend percent    = 100.0 % of the study area
+Negative trend percent    =  48.4 % of the study area
+ 
+------------------------------------------------------------

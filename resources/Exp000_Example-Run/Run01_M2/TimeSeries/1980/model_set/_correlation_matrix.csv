@@ -1,0 +1,7 @@
+"","cldtot_avg","frwlt_avg","grn_avg","hflux_avg","qv2m_avg","swgnt_avg"
+"cldtot_avg",1,NA,NA,NA,NA,NA
+"frwlt_avg",NA,1,NA,NA,NA,NA
+"grn_avg",NA,NA,1,NA,NA,NA
+"hflux_avg",NA,NA,NA,1,NA,NA
+"qv2m_avg",NA,NA,NA,NA,1,NA
+"swgnt_avg",NA,NA,NA,NA,NA,1

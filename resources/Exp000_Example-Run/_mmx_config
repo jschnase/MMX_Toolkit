@@ -1,0 +1,151 @@
+# ==============================================================================
+#
+# _mmx_config
+#
+# ==============================================================================
+
+
+# experiment / run configuration -----------------------------------------------
+EXPERIMENT_NAME=Exp000
+RUN_NAME=Run01_M2
+GBIF_TAXON_KEY=6091692
+SPECIES_NAME=Cassins_Sparrow
+
+
+# data destination (DST) directories --------------------------------------------
+# - this is where output from step 2) in the Guide to Operations will be stored
+# - default directory name is the species taxon key + namee
+OF_DST_DIRECTORY=~/MMX_Toolkit/data/occurrence_file_collections/
+WS_DST_DIRECTORY=~/MMX_Toolkit/data/working_set_collections/
+
+
+# data source (SRC) directories ------------------------------------------------
+# - this is where input for step 3) in the Guide to Operations will come from
+# - default directory name is the species taxon key + name
+OF_SRC_DIRECTORY=~/MMX_Toolkit/data/occurrence_file_collections/6091692-Cassins_Sparrow-Annual
+WS_SRC_DIRECTORY=~/MMX_Toolkit/data/working_set_collections/6091692-Cassins_Sparrow-M2
+
+
+# spatial extent of the study area ---------------------------------------------
+
+# - cassin's sparrow usgs gap extent
+SPATIAL_EXTENT_UL_LAT=44.01348
+SPATIAL_EXTENT_UL_LON=-115.5647
+SPATIAL_EXTENT_LR_LAT=24.83738
+SPATIAL_EXTENT_LR_LON=-93.47812
+
+# # - conus extent
+# SPATIAL_EXTENT_UL_LAT=50.0
+# SPATIAL_EXTENT_UL_LON=-128.0
+# SPATIAL_EXTENT_LR_LAT=24.5
+# SPATIAL_EXTENT_LR_LON=-65.5
+
+
+# temporal extent of the study -------------------------------------------------
+TEMPORAL_EXTENT_START_YR=1980
+TEMPORAL_EXTENT_STOP_YR=2015
+TEMPORAL_EXTENT_INTERVAL=5
+
+
+# annual cycle phase of the study ----------------------------------------------
+# - options are: Annual (full year), Breeding, Overwintering, North_Migration, 
+# - and South_Migration
+TEMPORAL_EXTENT_START_MO=1
+TEMPORAL_EXTENT_STOP_MO=12
+ANNUAL_CYCLE_PHASE=Annual
+
+
+# mmx selection specs ----------------------------------------------------------
+# set to n=10 for demo purposes, use >= 50 for experimental runs
+MMX_SELECTION=TRUE
+VARIABLE_SAMPLE_SIZE=10
+
+
+# enmeval model tuning specs ---------------------------------------------------
+# FULL SCAN TRUE:  fc = c("L", "LQ", "H", "LQH", "LQHP", "LQHPT") / RMvalues = seq(0.5, 4, 0.5)
+# FULL SCAN FALSE: fc = c("L", "Q", "LQ") / RMvalues = seq(1.0, 3.0, 1.0),
+FULL_ENMEVAL_SCAN=FALSE
+
+
+# velocity thresholds ----------------------------------------------------------
+# - used in step 09b) ...
+CLIMATE_MATCH_THRESHOLD=0.10
+
+
+# predictor base collection ----------------------------------------------------
+# - used in step 2b as the source to build working_set collections
+# - available collections include: m2_05YrAg_nc_avg, m2_05YrAg_nc_all, and
+# - mc_05YrAg_t2m_prectotcorr_tif
+# BASE_COLLECTION=m2_05YrAg_nc_avg
+BASE_COLLECTION=mc_05YrAg_t2m_prectotcorr_tif
+
+
+# system specs -----------------------------------------------------------------
+SYSTEM_NAME=JLS_MacBook_Pro
+NODE_COUNT=1
+CORE_COUNT=8
+
+
+# mmx toolkit directory paths --------------------------------------------------
+MMX_TOOLKIT_DIRECTORY=~/MMX_Toolkit
+MMX_EXPERIMENT_DIRECTORY=~/MMX_Experiment
+MMX_CONFIG_FILE=~/MMX_Experiment/_mmx_config
+MTK_MBOX_DIRECTORY=~/MMX_Toolkit/_mbox
+MTK_BASH_DIRECTORY=~/MMX_Toolkit/bash
+MTK_DATA_DIRECTORY=~/MMX_Toolkit/data
+MTK_MMX_DIRECTORY=~/MMX_Toolkit/MMX
+MTK_TEMPLATES_DIRECTORY=~/MMX_Toolkit/templates
+MTK_R_DIRECTORY=~/MMX_Toolkit/R
+MTK_RESOURCES_DIRECTORY=~/MMX_Toolkit/resources
+EXPLORE_MMX_TOOLKIT_DIRECTORY=/home/jschnase/MMX_Toolkit
+
+
+# mmx toolkit shapefiles / -------------------------------------------------------
+# STATE_LINES_RDS=~/MMX_Toolkit/resources/gadm36_USA_1_sp.rds
+STATE_LINES_RDS=~/MMX_Toolkit/resources/shapefiles/tl_2012_us_state/tl_2012_us_state.shp
+
+STATE_NAME=NM
+STATE_SHAPEFILE=~/MMX_Toolkit/resources/shapefiles/GOVTUNIT_New_Mexico_State_Shape/Shape/GU_StateOrTerritory.shp
+
+SPECIES_SHAPEFILE=~/MMX_Toolkit/resources/shapefiles/bCASPx_CONUS_Range_2001v1/bCASPx_CONUS_Range_2001v1.shp
+
+
+# end of configuration file ----------------------------------------------------
+EOF=EOF
+
+
+# ------------------------------------------------------------------------------
+# Copyright (C) 2018-2023 United States Government as represented by the
+# Administrator of the National Aeronautics and Space Administration (NASA).
+# All Rights Reserved.
+#
+# Author: JLS
+# Date: 2023.04.22
+#
+# ------------------------------------------------------------------------------
+#
+# THE SUBJECT SOFTWARE IS PROVIDED "AS IS" WITHOUT ANY WARRANTY OF ANY
+# KIND, EITHER EXPRESSED, IMPLIED, OR STATUTORY, INCLUDING, BUT NOT
+# LIMITED TO, ANY WARRANTY THAT THE SUBJECT SOFTWARE WILL CONFORM TO
+# SPECIFICATIONS, ANY IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR
+# A PARTICULAR PURPOSE, OR FREEDOM FROM INFRINGEMENT, ANY WARRANTY THAT
+# THE SUBJECT SOFTWARE WILL BE ERROR FREE, OR ANY WARRANTY THAT
+# DOCUMENTATION, IF PROVIDED, WILL CONFORM TO THE SUBJECT SOFTWARE. THIS
+# AGREEMENT DOES NOT, IN ANY MANNER, CONSTITUTE AN ENDORSEMENT BY
+# GOVERNMENT AGENCY OR ANY PRIOR RECIPIENT OF ANY RESULTS, RESULTING
+# DESIGNS, HARDWARE, SOFTWARE PRODUCTS OR ANY OTHER APPLICATIONS RESULTING
+# FROM USE OF THE SUBJECT SOFTWARE.  FURTHER, GOVERNMENT AGENCY DISCLAIMS
+# ALL WARRANTIES AND LIABILITIES REGARDING THIRD-PARTY SOFTWARE, IF
+# PRESENT IN THE ORIGINAL SOFTWARE, AND DISTRIBUTES IT "AS IS".
+#
+# RECIPIENT AGREES TO WAIVE ANY AND ALL CLAIMS AGAINST THE UNITED STATES
+# GOVERNMENT, ITS CONTRACTORS AND SUBCONTRACTORS, AS WELL AS ANY PRIOR
+# RECIPIENT.  IF RECIPIENT'S USE OF THE SUBJECT SOFTWARE RESULTS IN ANY
+# LIABILITIES, DEMANDS, DAMAGES, EXPENSES OR LOSSES ARISING FROM SUCH USE,
+# INCLUDING ANY DAMAGES FROM PRODUCTS BASED ON, OR RESULTING FROM,
+# RECIPIENT'S USE OF THE SUBJECT SOFTWARE, RECIPIENT SHALL INDEMNIFY AND
+# HOLD HARMLESS THE UNITED STATES GOVERNMENT, ITS CONTRACTORS AND
+# SUBCONTRACTORS, AS WELL AS ANY PRIOR RECIPIENT, TO THE EXTENT PERMITTED
+# BY LAW.  RECIPIENT'S SOLE REMEDY FOR ANY SUCH MATTER SHALL BE THE
+# IMMEDIATE, UNILATERAL TERMINATION OF THIS AGREEMENT.
+# ------------------------------------------------------------------------------
