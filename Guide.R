@@ -66,8 +66,8 @@ guide_start1 <- system("date +%Y.%m.%d-%H.%M.%S", intern=TRUE)
 # and create an MMX_Experiment directory in locations of your choosing,  
 # then create symbolic links from your home directory to these two locations. 
 # For example, from my home directory ~/ I see: 
-# ~/MMX_Experiment -> /Users/myname/Dropbox/MMX-Project/MMX-Experiments/Exp000
-# ~/MMX_Toolkit -> /Users/myname/Dropbox/MMX-Project/MMX-Development/MMX_Toolkit
+# ~/MMX_Experiment -> /Users/myname/MMX-Project/MMX-Experiments/Exp000
+# ~/MMX_Toolkit -> /Users/myname/MMX-Project/MMX-Development/MMX_Toolkit_V0.1.0
 
 # >>> (b) Configuration file -- Copy the _mmx_config file from the ~/MMX_Toolkit
 # /resources directory to the new ~/MMX_Experiment directory and edit the file
