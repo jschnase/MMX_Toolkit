@@ -1,0 +1,117 @@
+# ==============================================================================
+#
+# _species_list
+#
+# ==============================================================================
+
+
+# ------------------------------------------------------------------------------
+# Salas et al. South Central Climate Science Center focal species (9):
+
+# (1) Lesser Prairie-Chicken (Tympanuchus pallidicinctus)
+# GBIF_TAXON_KEY=2473529
+# SPECIES_NAME=Lesser_Prairie-Chicken
+
+# (2) Montezuma Quail (Cyrtonyx montezumae)
+# GBIF_TAXON_KEY=2474264
+# SPECIES_NAME=Montezuma_Quail
+
+# (3) Juniper Titmouse (Baeolophus ridgwayi)
+GBIF_TAXON_KEY=2487898
+SPECIES_NAME=Juniper_Titmouse
+
+# (4) Spotted Owl (Strix occidentalis)
+# GBIF_TAXON_KEY=2497487
+# SPECIES_NAME=Spotted_Owl
+
+# (5) White-tailed Ptarmigan (Lagopus leucurus)
+# GBIF_TAXON_KEY=5227717
+# SPECIES_NAME=White-Tailed_Ptarmigan
+
+# (6) Scaled Quail (Callipepla squamata)
+# GBIF_TAXON_KEY=5228075
+# SPECIES_NAME=Scaled_Quail
+
+# (7) Northern/Masked Bobwhite Quail (Colinus virginianus)
+# GBIF_TAXON_KEY=5228108
+# SPECIES_NAME=Northern_Bobwhite_Quail
+
+# (8) Pinyon Jay (Gymnorhinus cyanocephalus)
+# GBIF_TAXON_KEY=5229498
+# SPECIES_NAME=Pinyon_Jay
+
+# (9) Cassin's Sparrow (Peucaea cassinii)
+# GBIF_TAXON_KEY=6091692
+# SPECIES_NAME=Cassins_Sparrow
+
+
+# ------------------------------------------------------------------------------
+# Other species ...
+
+# Mountain Bluebird (Sialia currucoides)
+# GBIF_TAXON_KEY=2490935
+# SPECIES_NAME=Mountain_Bluebird
+
+# Greater Roadrunner (Geococcyx californianus)
+# GBIF_TAXON_KEY=2496459
+# SPECIES_NAME=Greater_Roadrunner
+
+# Spotted Towhee (Pipilo maculatus)
+# GBIF_TAXON_KEY=2496459
+# SPECIES_NAME=Spotted_Towhee
+
+# Woodhouse's Scrub-Jay (Aphelocoma woodhouseii)
+# GBIF_TAXON_KEY=5844900
+# SPECIES_NAME=Woodhouses_Scrub-Jay
+
+# ------------------------------------------------------------------------------
+# USFWS focal species
+
+# Mountain Plover (Charadrius montanus)
+# GBIF_TAXON_Key=2480292
+# SPECIES_NAME=Mountain_Plover
+
+# Bendire Thrasher (Toxostoma bendirei)
+# GBIF_TAXON_Key=5231697
+# SPECIES_NAME=Bendire_Thrasher
+
+
+# end of file -----------------------------------------------------------------
+EOF=EOF
+
+
+# ------------------------------------------------------------------------------
+# Copyright (C) 2018-2023 United States Government as represented by the
+# Administrator of the National Aeronautics and Space Administration (NASA).
+# All Rights Reserved.
+#
+# Author: John L. Schnase, NASA
+# Revision Date: 2023.03.02
+#
+# ------------------------------------------------------------------------------
+#
+# THE SUBJECT SOFTWARE IS PROVIDED "AS IS" WITHOUT ANY WARRANTY OF ANY
+# KIND, EITHER EXPRESSED, IMPLIED, OR STATUTORY, INCLUDING, BUT NOT
+# LIMITED TO, ANY WARRANTY THAT THE SUBJECT SOFTWARE WILL CONFORM TO
+# SPECIFICATIONS, ANY IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR
+# A PARTICULAR PURPOSE, OR FREEDOM FROM INFRINGEMENT, ANY WARRANTY THAT
+# THE SUBJECT SOFTWARE WILL BE ERROR FREE, OR ANY WARRANTY THAT
+# DOCUMENTATION, IF PROVIDED, WILL CONFORM TO THE SUBJECT SOFTWARE. THIS
+# AGREEMENT DOES NOT, IN ANY MANNER, CONSTITUTE AN ENDORSEMENT BY
+# GOVERNMENT AGENCY OR ANY PRIOR RECIPIENT OF ANY RESULTS, RESULTING
+# DESIGNS, HARDWARE, SOFTWARE PRODUCTS OR ANY OTHER APPLICATIONS RESULTING
+# FROM USE OF THE SUBJECT SOFTWARE.  FURTHER, GOVERNMENT AGENCY DISCLAIMS
+# ALL WARRANTIES AND LIABILITIES REGARDING THIRD-PARTY SOFTWARE, IF
+# PRESENT IN THE ORIGINAL SOFTWARE, AND DISTRIBUTES IT "AS IS".
+#
+# RECIPIENT AGREES TO WAIVE ANY AND ALL CLAIMS AGAINST THE UNITED STATES
+# GOVERNMENT, ITS CONTRACTORS AND SUBCONTRACTORS, AS WELL AS ANY PRIOR
+# RECIPIENT.  IF RECIPIENT'S USE OF THE SUBJECT SOFTWARE RESULTS IN ANY
+# LIABILITIES, DEMANDS, DAMAGES, EXPENSES OR LOSSES ARISING FROM SUCH USE,
+# INCLUDING ANY DAMAGES FROM PRODUCTS BASED ON, OR RESULTING FROM,
+# RECIPIENT'S USE OF THE SUBJECT SOFTWARE, RECIPIENT SHALL INDEMNIFY AND
+# HOLD HARMLESS THE UNITED STATES GOVERNMENT, ITS CONTRACTORS AND
+# SUBCONTRACTORS, AS WELL AS ANY PRIOR RECIPIENT, TO THE EXTENT PERMITTED
+# BY LAW.  RECIPIENT'S SOLE REMEDY FOR ANY SUCH MATTER SHALL BE THE
+# IMMEDIATE, UNILATERAL TERMINATION OF THIS AGREEMENT.
+# ------------------------------------------------------------------------------
