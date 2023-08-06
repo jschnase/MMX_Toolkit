@@ -1,6 +1,6 @@
 # MMX Toolkit v0.1.0
 
-This is the publicly-accessible repository for code, data, and other resources related to NASA's MMX Toolkit project. The code set is in active development and made available "AS IS" without any warranty of any kind. Please email john.l.schnase@nasa.gov for additional information.
+This is the publicly-accessible repository for code, data, and other resources related to NASA's MMX Toolkit. The code set is a research platform, in active development, and made available "AS IS" without any warranty of any kind. Please email john.l.schnase@nasa.gov for additional information.
 
 John Schnase and Mark Carroll
 
