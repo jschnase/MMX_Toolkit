@@ -1,11 +1,13 @@
 # MMX Toolkit v0.1.0
- Pre-release MMX Toolkit for BiDS'23 Conference Paper Review
 
-This directory is a placeholder for the MMX Toolkit, which is described in a paper that is currently being reviewed by the BiDS '23 Conference program committee. The directory will become the publicly-accessible repository for code, data, and other resouces that we plan to release on 5 November 2023 at the start of the conference. Please email john.l.schnase@nasa.gov for additional information.
-
-Many thanks,
+This is the publicly-accessible repository for code, data, and other resources related to NASA's MMX Toolkit. The code set is in active development and made available "AS IS" without any warranty of any kind. Please email john.l.schnase@nasa.gov for additional information.
 
 John Schnase and Mark Carroll
 
+Data Science Group / Innovation Lab
 NASA Goddard Space Flight Center
+
+
+_____
+Copyright (C) 2018-2023 United States Government as represented by the Administrator of the National Aeronautics and Space Administration (NASA). All Rights Reserved. This software is made available "AS IS" without any warranty of any kind.
 
