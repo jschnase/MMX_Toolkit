@@ -1,6 +1,6 @@
 # MMX Toolkit v0.1.0
 
-This is the pre-release repository for code, data, and other resources related to NASA's MMX Toolkit. The code set implements an automated retrospective ENM workflow. It is very much a research platform in active development. We make the MMX Toolkit available here without technical support: it is intended to be used for educational purposes only. This software is provided "AS IS" without any warranty of any kind. For more information about the project, please contact john.l.schnase@nasa.gov.
+This is the pre-release repository for code, data, and other resources related to NASA's MMX Toolkit. The code set implements an automated retrospective ecological niche modeling (ENM) workflow. It is very much a research platform in active development. We make the MMX Toolkit available here without technical support: it is intended to be used for educational purposes only. This software is provided "AS IS" without any warranty of any kind. For more information about the project, please contact john.l.schnase@nasa.gov.
 
 John Schnase and Mark Carroll
 
