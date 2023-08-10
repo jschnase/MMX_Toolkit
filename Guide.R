@@ -1,17 +1,36 @@
 # ==============================================================================
 #
-# Guide.R - MMX Toolkit V0.1.0 Interactive Users Guide
+# Guide.R 
+#
+# - This is the interactive users guide for MMX Toolkit V0.1.0 ...
 #
 # ==============================================================================
 
 
-rm(list = ls())
-source("~/MMX_Toolkit/R/_config_functions.R")
-read.config()
-show.config()
+# ------------------------------------------------------------------------------
+# INTRODUCTION -----------------------------------------------------------------
+# ------------------------------------------------------------------------------
+#
+# The scripts described below can be run step-by-step in the RStudio environment 
+# by entering CMD + Return while the cursor is positioned over an R statement.  
+# This is probably the best way to use the guide, because it allows close 
+# monitoring of the process. However, the entire workflow can be carried out 
+# "automatically" by selecting all the lines in the guide and pressing "Run" at 
+# the top right of the RStudio script window.
+#
+# Note: This is a research code set under active development. It is made 
+# available here without technical support and is intended to be used for 
+# demonstration and educational purposes only. Strange things can happen in
+# strange places, so please exercise caution when working with the code. This
+# software is provided "AS IS" without any warranty of any kind.
+#
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 
 
+# ------------------------------------------------------------------------------
 # SYSTEM CONFIGURATION ---------------------------------------------------------
+# ------------------------------------------------------------------------------
 #
 # MacBook Pro (Mac14,7) Apple M2
 # maxOS Monterey Version 12.6.3
@@ -42,17 +61,20 @@ show.config()
 #
 # MaxEnt Maximum Entropy Species Distribution Modeling
 # Version 3.4.1
+#
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 
-# ------------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
-#
-# These scripts can be run step-by-step in the RStudio environment by entering 
-# CMD + Return while the cursor is positioned over the R statement. The entire 
-# workflow can be carried out "automatically" by selecting all the lines in the 
-# guide and pressing "Run" at the top right of the RStudio script window.
-#
-# ------------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
+
+# set up the RStudio environment -----------------------------------------------
+
+rm(list = ls())
+source("~/MMX_Toolkit/R/_config_functions.R")
+read.config()
+show.config()
+
+
+# main -------------------------------------------------------------------------
 
 print(" "); print("Starting MMX_Tk_GTO.R ..."); print(" ")
 
