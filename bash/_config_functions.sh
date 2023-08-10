@@ -2,6 +2,8 @@
 #
 # _config_functions.sh
 #
+# - utility bash functions to read / show _mmx_config file
+#
 # ==============================================================================
 
 

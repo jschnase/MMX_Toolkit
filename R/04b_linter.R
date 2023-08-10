@@ -1,7 +1,8 @@
 # ==============================================================================
 #
 # 04b_linter.R
-# - removes NA-rich variables from the selection_set
+#
+# - script to remove NA-rich variables from the selection_set
 #   (optional, used before mmx_reducer.R, repeat as needed until clean)
 #
 # ==============================================================================
@@ -32,7 +33,7 @@ stop_yr  <- as.numeric(TEMPORAL_EXTENT_STOP_YR)
 step     <- as.numeric(TEMPORAL_EXTENT_INTERVAL)
 
 
-# main processing loop ---------------------------------------------------------
+# main -------------------------------------------------------------------------
 
 print(" "); print("Startimg 04b_linter.R ..."); print(" ")
 

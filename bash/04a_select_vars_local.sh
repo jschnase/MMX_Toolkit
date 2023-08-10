@@ -3,7 +3,8 @@
 # ==============================================================================
 #
 # 04a_select_vars_local.sh
-# - starts the MMX selection process by launchiing an ensemble run
+#
+# - script starts the MMX selection process by launchiing an ensemble run
 #   (script will process all intervals in the time series, or a single interval
 #    as indicated by a single positional parameter)
 #
@@ -15,7 +16,6 @@ source ~/MMX_Toolkit/bash/_config_functions.sh
 read_config
 # show_config
 
-# functions --------------------------------------------------------------------
 
 function link_directories () {
 # sym link experiment's time series interval directories to mmx system

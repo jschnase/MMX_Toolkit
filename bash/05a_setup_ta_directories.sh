@@ -4,6 +4,8 @@
 #
 # 05a_setup_ta_directories.sh
 #
+# - script creates and sets up directories for the Theil-Sen trend analysis
+#
 # ==============================================================================
 
 

@@ -2,12 +2,12 @@
 #
 # 02c_mc_ws_builder.R
 #
-# Script subsets mmx base_collection MERRA-2-derived MERRAclim-2 tif files to 
-# create a working_set collection of cropped, resampled, downscaled, and masked 
-# MaxEnt-ready asc files following the method of R.J. Hijmans as described here:
-# https://stat.ethz.ch/pipermail/r-sig-geo/2010-February/007544.html
+# - script subsets mmx base_collection MERRA-2-derived MERRAclim-2 tif files to 
+#   create a working_set collection of cropped, resampled, downscaled, and masked 
+#   MaxEnt-ready asc files following the method of R.J. Hijmans as described here:
+#   https://stat.ethz.ch/pipermail/r-sig-geo/2010-February/007544.html
 #
-# (NB default settings throughout are set up for 05YrAg processing)
+#   (NB default settings throughout are set up for 05YrAg processing)
 #
 # ==============================================================================
 
@@ -83,7 +83,7 @@ writeRaster(mask, filename=paste0(out_dir, '/_mask.asc'), format='ascii', overwr
 # ------
 
 
-# main processing loop ---------------------------------------------------------
+# main -------------------------------------------------------------------------
 
 print("Starting 02c_mc_ws_builder.R ...")
 

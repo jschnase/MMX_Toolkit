@@ -1,14 +1,15 @@
 # ==============================================================================
 #
 # 02a_get_occurrences.R
-# - gathers observational data from the Global Biodiversity Information
+#
+# - script gathers observational data from the Global Biodiversity Information
 #   Facility (GBIF) and builds a times series occurrence files
 #
-# Useful refs:
-# https://cran.csiro.au/web/packages/rangeModelMetadata/vignettes/
-#       rmm_workflowWithExampleRangeModel.html
-# https://ropensci.org/tutorials/rgbif_tutorial/
-# https://gbif-europe.github.io/nordic_oikos_2018_r/s3_gbif_demo/gbif_demo.html
+# - Useful refs:
+#   https://cran.csiro.au/web/packages/rangeModelMetadata/vignettes/
+#         rmm_workflowWithExampleRangeModel.html
+#   https://ropensci.org/tutorials/rgbif_tutorial/
+#   https://gbif-europe.github.io/nordic_oikos_2018_r/s3_gbif_demo/gbif_demo.html
 #
 # ==============================================================================
 
@@ -51,7 +52,7 @@ if (!dir.exists(out_dir)){
 }
 
 
-# main processing loop ---------------------------------------------------------
+# main -------------------------------------------------------------------------
 
 print(" "); print("Starting 02a_get_occurrences.R ..."); print(" ")
 

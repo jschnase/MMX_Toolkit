@@ -4,6 +4,8 @@
 #
 # 07a_setup_va_directories.sh
 #
+# - script creates and sets up directory for the velocity analysis
+#
 # ==============================================================================
 
 

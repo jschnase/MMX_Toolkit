@@ -1,7 +1,8 @@
 # ==============================================================================
 #
 # 06a_enm_theilsen_trend.R
-# - finds Theil-Sen median slope estimator for changing hsm predictions
+#
+# - Theil-Sen median slope estimator for changing enm predictions
 #
 # ==============================================================================
 
@@ -61,7 +62,7 @@ fn7  <- paste0(lbl, "-Stats") # theil-sen summary stats
 fn8  <- paste0(lbl, "-RStudio-Image") # r image for the session
 
 
-# main processing --------------------------------------------------------------
+# main -------------------------------------------------------------------------
 
 print(" "); print("Starting 06a_enm_theilsen_trend.R ..."); print(" ")
 
@@ -326,14 +327,6 @@ minor.tick(nx=2, ny=2, tick.ratio=0.5, x.args = list(), y.args = list())
 plot(state_lines, add = TRUE)
 plot(pos, col=pal_pos, add=TRUE, legend = FALSE)
 plot(neg, col=pal_neg, add=TRUE, legend = FALSE)
-########### special for paper #3 ############
-# Cassins_Sparrow-GBIF-Annual-M2b-AVG
-# points(-102.9159, 33.44738, pch = 1)
-# points(-104.0122, 33.65596, pch = 16)
-# Cassins_Sparrow-GBIF-Annual-MCb-AVG
-# points(-102.7388, 33.25646, pch = 1)
-# points(-103.3524, 33.67923, pch = 16)
-#############################################
 
 png(paste0(dst, "/", fn2, "-Z-Overlay.png"),
     width     = 1000,
@@ -349,14 +342,6 @@ minor.tick(nx=2, ny=2, tick.ratio=0.5, x.args = list(), y.args = list())
 plot(state_lines, add = TRUE)
 plot(pos, col=pal_pos, add=TRUE, legend = FALSE)
 plot(neg, col=pal_neg, add=TRUE, legend = FALSE)
-########### special for paper #3 ############
-# Cassins_Sparrow-GBIF-Annual-M2b-AVG
-# points(-102.9159, 33.44738, pch = 1)
-# points(-104.0122, 33.65596, pch = 16)
-# Cassins_Sparrow-GBIF-Annual-MCb-AVG
-# points(-102.7388, 33.25646, pch = 1)
-# points(-103.3524, 33.67923, pch = 16)
-#############################################
 dev.off()
 
 # prep results for stats file

@@ -4,6 +4,8 @@
 #
 # 03b_populate_ts_directories.sh
 #
+# - script sets up second-level experiment directories for trend analysis
+#
 # ==============================================================================
 
 

@@ -2,6 +2,8 @@
 #
 # _config_functions.R
 #
+# - utility R functions to read / show _mmx_config file
+#
 # ==============================================================================
 
 

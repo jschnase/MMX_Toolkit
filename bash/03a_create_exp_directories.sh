@@ -4,6 +4,8 @@
 #
 # 03a_create_exp_directories.sh  
 #
+# - script creates top-level experiment directories for trend analysis
+#
 # ==============================================================================
 
 

@@ -1,8 +1,9 @@
 # ==============================================================================
 #
 # 04c_reducer.R
-# - removes collinear variables from the selection_set to create a model_set
-#   of non-collinear variables for use in final model construction
+#
+# - script removes collinear variables from the selection_set to create a 
+#   model_set of non-collinear variables for use in final model construction
 #   (generally used after mmx_linter.R)
 #
 # ==============================================================================
@@ -30,7 +31,7 @@ stop_yr  <- as.numeric(TEMPORAL_EXTENT_STOP_YR)
 step     <- as.numeric(TEMPORAL_EXTENT_INTERVAL)
 
 
-# main processing loop ---------------------------------------------------------
+# main -------------------------------------------------------------------------
 
 print(" "); print("Starting 04c_reducer.R ..."); print(" ")
 

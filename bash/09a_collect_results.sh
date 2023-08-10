@@ -4,6 +4,8 @@
 #
 # 09a_collect_results.sh 
 #
+# - script to collect key results into a summary directory
+#
 # ==============================================================================
 
 
