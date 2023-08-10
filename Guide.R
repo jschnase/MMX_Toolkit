@@ -54,7 +54,6 @@
 # OpenJDK Runtime Environment (build 20.0.2+9-78)
 # OpenJDK 64-Bit Server VM (build 20.0.2+9-78, mixed mode, sharing)
 #
-#
 # Python 3.9.12 (main, Apr  5 2022, 01:53:17)
 # [Clang 12.0.0 ] :: Anaconda, Inc. on darwin
 # Libraries: os, sys, subprocess, time, shutil, random, csv, datetime, time,
