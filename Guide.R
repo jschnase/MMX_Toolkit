@@ -2,7 +2,7 @@
 #
 # Guide.R 
 #
-# - Interactive users guide for the MMX Toolkit V0.1.0 ...
+# - This is the interactive users guide for the MMX Toolkit V0.1.0 ...
 #
 # ==============================================================================
 
