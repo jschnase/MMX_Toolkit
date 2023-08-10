@@ -93,7 +93,7 @@ guide_start1 <- system("date +%Y.%m.%d-%H.%M.%S", intern=TRUE)
 
 # >>> (b) Configuration file -- Copy the _mmx_config file from the ~/MMX_Toolkit
 # /resources directory to the new ~/MMX_Experiment directory and edit the file
-# as needed to configure for the current run
+# as needed to configure for the current run.
 
 
 # (02) PREPARE DATA ------------------------------------------------------------
