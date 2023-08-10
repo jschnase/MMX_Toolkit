@@ -2,7 +2,7 @@
 #
 # Guide.R 
 #
-# - This is the interactive users guide for MMX Toolkit V0.1.0 ...
+# - Interactive users guide for the MMX Toolkit V0.1.0 ...
 #
 # ==============================================================================
 
@@ -11,12 +11,13 @@
 # INTRODUCTION -----------------------------------------------------------------
 # ------------------------------------------------------------------------------
 #
-# The scripts described below can be run step-by-step in the RStudio environment 
-# by entering CMD + Return while the cursor is positioned over an R statement.  
-# This is probably the best way to use the guide, because it allows close 
-# monitoring of the process. However, the entire workflow can be carried out 
-# "automatically" by selecting all the lines in the guide and pressing "Run" at 
-# the top right of the RStudio script window.
+# The MMX Toolkit implements a retrospective ecological niche modeling (ENM) 
+# workflow. The scripts described below can be run step-by-step in the RStudio 
+# environment by entering CMD + Return while the cursor is positioned over an R 
+# statement. This is probably the best way to use the guide, because it allows 
+# close monitoring of the process. However, the entire workflow can be carried 
+# out "automatically" by selecting all the lines in the guide and pressing "Run
+# at the top right of the RStudio script window.
 #
 # Note: This is a research code set under active development. It is made 
 # available here without technical support and is intended to be used for 
