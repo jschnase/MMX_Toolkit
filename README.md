@@ -8,7 +8,7 @@ This is the archive repository for code, data, and other resources and documents
 
 ______
 
-Although the following paper doesn't involved rENM, we also include in the "phenology" folder an experimental codebase and minimal R package supporting the study.
+Although the following paper doesn't involve rENM, we also include in the "phenology" folder an experimental codebase and minimal R package supporting the study.
 
 – Schnase, J. L., M. L. Carroll, P. M. Montesano, and V. A. Seamster. 2025. Shifts in breeding phenology for Cassin’s Sparrow (<i>Peucaea cassinii</i>) over four decades. Journal of Field Ornithology 96(3):3. https://doi.org/10.5751/JFO-00691-960303
 

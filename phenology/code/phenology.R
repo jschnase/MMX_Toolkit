@@ -1,61 +1,3 @@
-#' Phenology Analysis Toolkit — Cassin's Sparrow (Peucaea cassinii)
-#'
-#' This script provides utilities for extracting, summarizing, and visualizing
-#' breeding-season phenology from eBird observation data. It originated as a
-#' research codebase supporting an analysis for the Journal of Field Ornithology.
-#' The present edition improves clarity, documentation, and reproducibility while
-#' leaving core analytical logic intact.
-#'
-#' ## Key improvements (this edition)
-#' - Added roxygen2 documentation stubs for each function.
-#' - Standardized style and added clarifying comments.
-#' - Removed workspace-destructive calls like `rm(list = ls())`.
-#' - Centralized dependency checks and reproducibility options.
-#' - Added an optional `main()` entry point showing typical workflow.
-#'
-#' ## Usage
-#' - Source this script in an R session: `source("phenology_clean.R")`
-#' - Call the functions directly (see individual `@examples`), or run `main()`.
-#'
-#' ## Dependencies
-#' - tidyverse, rstanarm, bayestestR, av, maps, gridExtra, sf, dplyr, paletteer, ggplot2
-#'
-#' ## License / Disclaimer
-#' Provided for educational/research purposes without warranty or support.
-#' Please review and validate methods against your specific use case.
-#'
-#' This is very much a work in progress. We will be adding detail to function
-#' descriptions, etc. in subsequent versions.
-#' 
-#' @docType script
-NULL
-
-# ---- Setup & Utilities -------------------------------------------------------
-
-# Quietly load required packages; if a package is missing, provide a helpful message.
-check_and_load <- function(pkgs) {
-  missing <- pkgs[!vapply(pkgs, requireNamespace, quietly = TRUE, FUN.VALUE = logical(1))]
-  if (length(missing)) {
-    stop(sprintf(
-      "Missing required packages: %s\nInstall with:\ninstall.packages(c(%s))",
-      paste(missing, collapse = ", "),
-      paste(sprintf('"%s"', missing), collapse = ", ")
-    ), call. = FALSE)
-  }
-  # Attach commonly used ones
-  suppressPackageStartupMessages({
-    lapply(pkgs, function(p) if (!paste0("package:", p) %in% search()) do.call(library, list(p, character.only = TRUE)))
-  })
-  invisible(TRUE)
-}
-
-# Reproducibility-friendly options (no global workspace clearing)
-options(stringsAsFactors = FALSE)
-set.seed(42)
-
-# Load packages declared in the original script
-check_and_load(c("tidyverse", "rstanarm", "bayestestR", "av", "maps", "gridExtra", "sf", "dplyr", "paletteer", "ggplot2"))
-
 # ===============================================================================================
 # Phenology analysis code ...
 
@@ -70,6 +12,7 @@ check_and_load(c("tidyverse", "rstanarm", "bayestestR", "av", "maps", "gridExtra
 
 # ===============================================================================================
 
+rm(list = ls())
 
 # load libraries
 suppressPackageStartupMessages(library(tidyverse))
@@ -95,14 +38,6 @@ odir <- "/Users/jschnase/Desktop/out"
 
 setwd("/Users/jschnase/Desktop/code")
 
-#' Get Records
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' get_records()
-#' @export
 
 get_records <- function() {
 
@@ -118,17 +53,6 @@ get_records <- function() {
     return(f)
 }
 
-#' Filter Range
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @param df [type] Description.
-#' @param yr1 [type] Description.
-#' @param yr2 [type] Description.
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' filter_range(df, yr1)
-#' @export
 filter_range <- function(df, yr1, yr2) {
 
     # function to extract a range of records based on start year and end year
@@ -139,17 +63,6 @@ filter_range <- function(df, yr1, yr2) {
     return(df)
 }
 
-#' Filter Span
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @param df [type] Description.
-#' @param year [type] Description.
-#' @param span [type] Description.
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' filter_span(df, year)
-#' @export
 filter_span <- function(df, year, span) {
 
     # function to extract a span of records based on start year and interval span
@@ -160,16 +73,6 @@ filter_span <- function(df, year, span) {
     return(df)
 }
 
-#' Filter State
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @param df [type] Description.
-#' @param state [type] Description.
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' filter_state(df, state)
-#' @export
 filter_state <- function(df, state) {
 
     # function to extract records based on state name
@@ -180,45 +83,16 @@ filter_state <- function(df, state) {
     return(df)
 }
 
-#' Filter Lon
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @param df [type] Description.
-#' @param lon [type] Description.
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' filter_lon(df, lon)
-#' @export
 filter_lon <- function(df, lon) {
   df <- df %>% filter(LON==lon)
   return(df)
 }
 
-#' Filter Bcr
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @param df [type] Description.
-#' @param bcr [type] Description.
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' filter_bcr(df, bcr)
-#' @export
 filter_bcr <- function(df, bcr) {
   df <- df %>% filter(BCR==bcr)
   return(df)
 }
 
-#' Extract Dates
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @param df [type] Description.
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' extract_dates(df)
-#' @export
 extract_dates <- function(df) { # 1985-2024 <== this is the default year range
 
     # function to parse the OBSERVATION.DATE field into months, years,
@@ -241,15 +115,6 @@ extract_dates <- function(df) { # 1985-2024 <== this is the default year range
     return(df)
 }
 
-#' Extract Phenology
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @param df [type] Description.
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' extract_phenology(df)
-#' @export
 extract_phenology <- function(df) { 
 
     # extracts phenological phases based on quantiles
@@ -265,16 +130,6 @@ extract_phenology <- function(df) {
     return(p)
 }
 
-#' Doy To Date
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @param doy [type] Description.
-#' @param year [type] Description.
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' doy_to_date(doy, year)
-#' @export
 doy_to_date <- function(doy, year) {
   if (any(doy < 1 | doy > ifelse(leap_year(year), 366, 365))) {
     stop("DOY must be between 1 and 365 (or 366 for leap years).")
@@ -282,19 +137,6 @@ doy_to_date <- function(doy, year) {
   as.Date(doy - 1, origin = paste0(year, "-01-01"))
 }
 
-#' Plot Phenology
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @param df [type] Description.
-#' @param start [type] Description.
-#' @param median [type] Description.
-#' @param end [type] Description.
-#' @param title [type] Description.
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' plot_phenology(df, start)
-#' @export
 plot_phenology <- function(df, start, median, end, title) {
 
     # function to create an occurrence density plot that
@@ -318,19 +160,6 @@ plot_phenology <- function(df, start, median, end, title) {
     return(p)
 }
 
-#' Plot Phenology Bbs
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @param df [type] Description.
-#' @param start [type] Description.
-#' @param median [type] Description.
-#' @param end [type] Description.
-#' @param title [type] Description.
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' plot_phenology_bbs(df, start)
-#' @export
 plot_phenology_bbs <- function(df, start, median, end, title) {
 
     # function to create an occurrence density plot that
@@ -357,14 +186,6 @@ plot_phenology_bbs <- function(df, start, median, end, title) {
     return(p)
 }
 
-#' Plot Combined Phenology
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' plot_combined_phenology()
-#' @export
 plot_combined_phenology <- function() {
 
     p <- ggplot() +
@@ -381,14 +202,6 @@ plot_combined_phenology <- function() {
     return(p)
 }
 
-#' Plot Combined Phenology Count Full Range
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' plot_combined_phenology_count_full_range()
-#' @export
 plot_combined_phenology_count_full_range <- function() {
 
     # all years -----
@@ -474,15 +287,6 @@ plot_combined_phenology_count_full_range <- function() {
     return()
 }
 
-#' Find Peak Doy
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @param df [type] Description.
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' find_peak_doy(df)
-#' @export
 find_peak_doy <- function(df) {
   
   # Count doy occurrences, find the top n days
@@ -500,16 +304,6 @@ find_peak_doy <- function(df) {
   return(peak)
 }
 
-#' Report Peak Day
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @param df [type] Description.
-#' @param n [type] Description.
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' report_peak_day(df, n)
-#' @export
 report_peak_day <- function(df, n) {
   
   # find the peak day in an input datafile (df)
@@ -533,14 +327,6 @@ report_peak_day <- function(df, n) {
   return()
 }
 
-#' State Density Graphs
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' state_density_graphs()
-#' @export
 state_density_graphs <- function() {
     
     # creates state record density graphs
@@ -631,14 +417,6 @@ state_density_graphs <- function() {
     
   }
   
-#' State Density Plots
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' state_density_plots()
-#' @export
 state_density_plots <- function() {
   
   # creates record density plot based on states
@@ -826,14 +604,6 @@ state_density_plots <- function() {
   
 }
 
-#' Longitude Density Graphs
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' longitude_density_graphs()
-#' @export
 longitude_density_graphs <- function() {
   
   # creates observation density graphs based on longitude ranges (fig 2a)
@@ -905,14 +675,6 @@ longitude_density_graphs <- function() {
   return()
 }
 
-#' Bcr Density Graphs
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' bcr_density_graphs()
-#' @export
 bcr_density_graphs <- function() {
   
   # creates record density graphs based on bird conservation regions
@@ -1020,14 +782,6 @@ bcr_density_graphs <- function() {
     
 }
 
-#' Bcr Density Plots
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' bcr_density_plots()
-#' @export
 bcr_density_plots <- function() {
   
   # creates record density plot based on bird conservation regions
@@ -1258,14 +1012,6 @@ bcr_density_plots <- function() {
   
 }
 
-#' Plot Combined Phenology Scaled
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' plot_combined_phenology_scaled()
-#' @export
 plot_combined_phenology_scaled <- function() {
 
     # all years -----
@@ -1320,17 +1066,6 @@ plot_combined_phenology_scaled <- function() {
     return()
 }
 
-#' Save Ggp
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @param ggp [type] Description.
-#' @param dst [type] Description.
-#' @param fn [type] Description.
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' save_ggp(ggp, dst)
-#' @export
 save_ggp <- function(ggp, dst, fn) {
 
     # function saves a ggplot object using using an input
@@ -1347,14 +1082,6 @@ save_ggp <- function(ggp, dst, fn) {
     dev.off()
 }
 
-#' Phen Summary
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' phen_summary()
-#' @export
 phen_summary <- function() {
 
     # function to create a summary of phenological metrics over the
@@ -1457,17 +1184,6 @@ phen_summary <- function() {
     return(phen_summary)
 }
 
-#' Plot Trend Lr
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @param summary [type] Description.
-#' @param region [type] Description.
-#' @param metric [type] Description.
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' plot_trend_lr(summary, region)
-#' @export
 plot_trend_lr <- function(summary, region, metric) {
 
     # function to regress the start, median, and end metrics
@@ -1510,17 +1226,6 @@ plot_trend_lr <- function(summary, region, metric) {
     return(p)
 }
 
-#' Plot Trend Lr Duration
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @param summary [type] Description.
-#' @param region [type] Description.
-#' @param metric [type] Description.
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' plot_trend_lr_duration(summary, region)
-#' @export
 plot_trend_lr_duration <- function(summary, region, metric) {
 
     # function to regress the trend of breeding season duration
@@ -1562,17 +1267,6 @@ plot_trend_lr_duration <- function(summary, region, metric) {
     return(p)
 }
 
-#' Plot Trend Br
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @param summary [type] Description.
-#' @param region [type] Description.
-#' @param metric [type] Description.
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' plot_trend_br(summary, region)
-#' @export
 plot_trend_br <- function(summary, region, metric) {
   
   # for testing 
@@ -1593,15 +1287,6 @@ plot_trend_br <- function(summary, region, metric) {
   # for Bayesian Regression Models.” The American Statistician 73 (3): 307–9.
   # https://doi.org/10.1080/00031305.2018.1549100.
   
-#' Bayes R2
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @param fit [type] Description.
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' bayes_R2(fit)
-#' @export
   bayes_R2 <- function(fit) {
     y_pred  <- rstanarm::posterior_linpred(fit)
     var_fit <- apply(y_pred, 1, var)
@@ -1693,17 +1378,6 @@ plot_trend_br <- function(summary, region, metric) {
   return(g)
 }
 
-#' Plot Trend Br Duration
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @param summary [type] Description.
-#' @param region [type] Description.
-#' @param metric [type] Description.
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' plot_trend_br_duration(summary, region)
-#' @export
 plot_trend_br_duration <- function(summary, region, metric) {
 
     # function to regress the trend of breeding season duration
@@ -1717,15 +1391,6 @@ plot_trend_br_duration <- function(summary, region, metric) {
     # for Bayesian Regression Models.” The American Statistician 73 (3): 307–9.
     # https://doi.org/10.1080/00031305.2018.1549100.
     
-#' Bayes R2
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @param fit [type] Description.
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' bayes_R2(fit)
-#' @export
     bayes_R2 <- function(fit) {
         y_pred <- rstanarm::posterior_linpred(fit)
         var_fit <- apply(y_pred, 1, var)
@@ -1812,14 +1477,6 @@ plot_trend_br_duration <- function(summary, region, metric) {
 
 }
 
-#' Extend Df
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' extend_df()
-#' @export
 extend_df <- function() { 
   
   # extends base df with longitudinal (lon) amd bird conservation
@@ -1866,14 +1523,6 @@ extend_df <- function() {
   
 }
 
-#' Phen Summary Revised
-#'
-#' @description
-#' Brief description of what this function does. (Edited: add more detail as needed.)
-#' @return A data.frame, list, plot, or scalar depending on the function.
-#' @examples
-#' phen_summary_revised()
-#' @export
 phen_summary_revised <- function() {
   
   # phenology from new groupings +++++++++++++++++++++++++++++++++++++++++++++++++ 
@@ -3327,19 +2976,3 @@ save_ggp(plot_trend_br_duration(x, "BG4", "duration"), "/Users/jschnase/Desktop/
 
 
 
-
-
-# ---- Optional Entry Point --------------------------------------------------
-
-#' Main
-#'
-#' @description Example entry point function that demonstrates a typical usage
-#' pattern. Customize paths and parameters to your environment.
-#' @export
-main <- function() {
-  message("Example only: customize file paths and parameters before running.")
-  # Example: df <- get_records("ebd_casspa_smp_relMar-2025.csv")
-  # Example: ph <- extract_phenology(df)
-  # Example: p  <- plot_phenology(ph$data, ph$start, ph$median, ph$end, title = "Cassin's Sparrow")
-  # print(p)
-}
